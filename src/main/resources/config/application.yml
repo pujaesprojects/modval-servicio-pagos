@@ -18,57 +18,25 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    edu.puj.patrones.cliente: DEBUG
+    edu.puj.modval.ms: DEBUG
 
 spring:
   application:
-    name: patrones-cliente
+    name: modval-app-taller
   profiles:
     active: dev
   jackson:
     serialization:
       indent-output: true
-  data:
-    jpa:
-      repositories:
-        bootstrap-mode: deferred
-    rest:
-      base-path: /api
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://34.70.156.253:5432/patrones
-    username: patrones
-    password: patrones2020.
-    hikari:
-      poolName: Hikari
-      auto-commit: false
-  jpa:
-    open-in-view: false
-    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
-    database: POSTGRESQL
-    show-sql: true
-    properties:
-      hibernate:
-        jdbc.time_zone: UTC-5
-        id.new_generator_mappings: true
-        connection.provider_disables_autocommit: true
-        cache.use_second_level_cache: true
-        cache.use_query_cache: false
-        generate_statistics: false
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
   task:
     execution:
-      thread-name-prefix: sisgeo-2-task-
+      thread-name-prefix: modval-2-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: patrones-scheduling-
+      thread-name-prefix: modval-scheduling-
       pool:
         size: 2
 

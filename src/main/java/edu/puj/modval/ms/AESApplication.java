@@ -1,4 +1,4 @@
-package edu.puj.patrones.cliente;
+package edu.puj.modval.ms;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -11,17 +11,17 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @SpringBootApplication
-public class SorApplication {
-    private static final Logger log = LoggerFactory.getLogger(SorApplication.class);
+public class AESApplication {
+    private static final Logger log = LoggerFactory.getLogger(AESApplication.class);
 
     private final Environment env;
 
-    public SorApplication(Environment env) {
+    public AESApplication(Environment env) {
         this.env = env;
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(SorApplication.class);
+        SpringApplication app = new SpringApplication(AESApplication.class);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
     }

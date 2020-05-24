@@ -1,7 +1,7 @@
 version: '2'
 services:
-  patrones-app:
-    image: cotizaciones_patrones_cliente
+  modval-app:
+    image: modval-taller-pagos
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod
