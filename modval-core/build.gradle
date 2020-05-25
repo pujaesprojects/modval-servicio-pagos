@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id "maven-publish"
+    id "idea"
+    id "net.ltgt.apt-idea"
+    id "net.ltgt.apt"
+}
+
+group 'edu.puj.modval'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+    useJUnitPlatform()
+}

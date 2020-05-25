@@ -3,6 +3,7 @@ name: Docker CI (Water)
 on:
   push:
     paths:
+      - 'modval-core/**/*.*'
       - 'modval-water/**/*.*'
       - '.github/workflows/*-water.yml'
       - 'build.gradle'

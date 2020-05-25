@@ -3,6 +3,7 @@ name: Docker CI (Gas)
 on:
   push:
     paths:
+      - 'modval-core/**/*.*'
       - 'modval-gas/**/*.*'
       - '.github/workflows/*-gas.yml'
       - 'build.gradle'
