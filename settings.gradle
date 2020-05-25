@@ -11,3 +11,6 @@ pluginManagement {
 }
 
 rootProject.name = 'modval-taller-pagos'
+include 'modval-gateway'
+include 'modval-water'
+

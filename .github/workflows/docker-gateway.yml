@@ -21,4 +21,4 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Compile Java with Gradle
-        run: ./gradlew -Pprod bootJar jib
+        run: ./gradlew -Pprod modval-gateway:bootJar modval-gateway:jib

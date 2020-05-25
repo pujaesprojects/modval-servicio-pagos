@@ -1,4 +1,4 @@
-package edu.puj.modval.ms.controller.vm;
+package edu.puj.modval.ms.controller;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -18,6 +18,7 @@ public class ServiceInstanceController {
 
     @RequestMapping("/service-instances/{applicationName}")
     public List<ServiceInstance> serviceInstancesByApplicationName(@PathVariable String applicationName) {
+        this.discoveryClient.getServices();
         return this.discoveryClient.getInstances(applicationName);
     }
 }

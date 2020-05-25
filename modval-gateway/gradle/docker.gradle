@@ -3,7 +3,7 @@ jib {
         image = "adoptopenjdk:11-jre-hotspot"
     }
     to {
-        image = "docker.pkg.github.com/pujaesprojects/modval-servicio-pagos/modval-taller:latest"
+        image = "docker.pkg.github.com/pujaesprojects/modval-servicio-pagos/modval-gateway:latest"
     }
     container {
         entrypoint = ["bash", "-c", "chmod +x /entrypoint.sh && sync && /entrypoint.sh"]
