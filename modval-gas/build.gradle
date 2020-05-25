@@ -1,0 +1,75 @@
+plugins {
+    id 'org.springframework.boot'
+    id "com.google.cloud.tools.jib"
+    id 'io.spring.dependency-management'
+    id "java"
+    id "maven-publish"
+    id "idea"
+    id "net.ltgt.apt-idea"
+    id "net.ltgt.apt"
+    id "io.spring.nohttp"
+}
+
+group 'edu.puj.modval'
+version '0.0.1-SNAPSHOT'
+
+apply from: "gradle/docker.gradle"
+
+defaultTasks "bootRun"
+
+springBoot {
+    mainClassName = "edu.puj.modval.ms.ms.WaterApplication"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
+    implementation "com.fasterxml.jackson.core:jackson-annotations"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "com.fasterxml.jackson.module:jackson-module-afterburner"
+    implementation "javax.annotation:javax.annotation-api"
+    implementation "javax.cache:cache-api"
+    implementation "org.apache.commons:commons-lang3"
+    implementation "org.springframework.boot:spring-boot-loader-tools"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation ("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    implementation ('com.github.javafaker:javafaker:1.0.2') {
+        exclude module: 'snakeyaml'
+    }
+
+    implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+    annotationProcessor "org.glassfish.jaxb:jaxb-runtime:${jaxb_runtime_version}"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_version}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
