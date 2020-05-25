@@ -1,6 +1,13 @@
 name: Docker CI
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'modval-gateway/**/*.*'
+      - '.github/workflows/*-gateway.yml'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle.properties'
 
 jobs:
   build:
