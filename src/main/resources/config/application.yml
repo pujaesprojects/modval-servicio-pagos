@@ -20,6 +20,13 @@ logging:
     io.github.jhipster: DEBUG
     edu.puj.modval.ms: DEBUG
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 spring:
   application:
     name: modval-app-taller
@@ -41,7 +48,7 @@ spring:
         size: 2
 
 server:
-  port: 8080
+  port: 0
   servlet:
     session:
       cookie:

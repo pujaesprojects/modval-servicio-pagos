@@ -10,9 +10,9 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'org.springframework.boot' version "${spring_boot_version}"
     id "com.google.cloud.tools.jib"
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'io.spring.dependency-management' version "${spring_dependency_version}"
     id "java"
     id "maven-publish"
     id "idea"
@@ -65,8 +65,6 @@ repositories {
 }
 
 dependencies {
-    implementation platform("io.github.jhipster:jhipster-dependencies:${jhipster_dependencies_version}")
-    implementation group: "io.github.jhipster", name: "jhipster-framework"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
@@ -83,6 +81,10 @@ dependencies {
     }
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
     implementation ('com.github.javafaker:javafaker:1.0.2') {
         exclude module: 'snakeyaml'
     }
@@ -95,6 +97,12 @@ dependencies {
     annotationProcessor "org.glassfish.jaxb:jaxb-runtime:${jaxb_runtime_version}"
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_version}"
     }
 }
 
