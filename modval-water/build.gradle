@@ -13,10 +13,12 @@ plugins {
 group 'edu.puj.modval'
 version '0.0.1-SNAPSHOT'
 
+apply from: "gradle/docker.gradle"
+
 defaultTasks "bootRun"
 
 springBoot {
-    mainClassName = "edu.puj.modval.ms.ms.AESApplication"
+    mainClassName = "edu.puj.modval.ms.ms.WaterApplication"
 }
 
 repositories {
