@@ -19,8 +19,7 @@ public class PaymentController implements IPaymentController {
     }
 
     @Override
-    @GetMapping(value = "/get-balance/{referenceCode}")
-    public ResponseEntity<PaymentDTO> getBalance(@PathVariable String referenceCode) {
+    public ResponseEntity<PaymentDTO> getBalance(String referenceCode) {
         return ResponseEntity.ok(this.paymentService.getBalance(referenceCode));
     }
 

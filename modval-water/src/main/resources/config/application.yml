@@ -28,7 +28,7 @@ eureka:
     preferIpAddress: true
     metadata-map:
       convenio: Agua
-      starts-with: 2
+      startsWith: 2
 
 spring:
   application:

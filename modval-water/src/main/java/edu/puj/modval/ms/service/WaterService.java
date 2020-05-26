@@ -1,21 +1,41 @@
 package edu.puj.modval.ms.service;
 
+import edu.puj.modval.ms.client.dto.WaterServiceResponse;
+import edu.puj.modval.ms.dto.PaymentDTO;
 import org.springframework.stereotype.Service;
 
 import edu.puj.modval.ms.client.ClientWaterProvider;
-import edu.puj.modval.ms.client.model.*;
+
+import java.time.LocalDate;
 
 @Service
-public class WaterService {
+public class WaterService implements IPaymentService {
 
-  private final ClientWaterProvider clientWaterProvider;
+    private final ClientWaterProvider clientWaterProvider;
 
-  public WaterService(ClientWaterProvider clientWaterProvider) {
-    this.clientWaterProvider = clientWaterProvider;
-  }
+    public WaterService(ClientWaterProvider clientWaterProvider) {
+        this.clientWaterProvider = clientWaterProvider;
+    }
 
-  public WaterServiceResponse getBalance(String reference) {
-    return clientWaterProvider.getInfoFactura(reference);
-  }
+    @Override
+    public PaymentDTO getBalance(String reference) {
+        var resultBalance = clientWaterProvider.getInfoFactura(reference);
+        PaymentDTO paymentDTO = new PaymentDTO();
+        paymentDTO.setValue(resultBalance.getValorFactura());
+        paymentDTO.setDate(LocalDate.now());
+        paymentDTO.setReferenceCode(reference);
+
+        return paymentDTO;
+    }
+
+    @Override
+    public PaymentDTO pay(PaymentDTO payment) {
+        return null;
+    }
+
+    @Override
+    public PaymentDTO returnPay(PaymentDTO payment) {
+        return null;
+    }
 
 }

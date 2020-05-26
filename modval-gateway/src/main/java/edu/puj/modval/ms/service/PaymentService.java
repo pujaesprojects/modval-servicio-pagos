@@ -1,5 +1,6 @@
 package edu.puj.modval.ms.service;
 
+import edu.puj.modval.ms.controller.IPaymentController;
 import edu.puj.modval.ms.dto.PaymentDTO;
 import edu.puj.modval.ms.dto.PaymentResponseDTO;
 import edu.puj.modval.ms.feign.client.IPaymentClient;
@@ -41,7 +42,7 @@ public class PaymentService implements IPaymentService {
     @Override
     public PaymentDTO getBalance(String reference) {
         ServiceInstance serviceInstance = this.getServiceInstance(reference);
-        if(serviceInstance != null) {
+        if (serviceInstance != null) {
             IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
             return client.getBalance(reference);
         } else {
@@ -55,7 +56,7 @@ public class PaymentService implements IPaymentService {
     @Override
     public PaymentDTO pay(PaymentDTO payment) {
         ServiceInstance serviceInstance = this.getServiceInstance(payment.getReferenceCode());
-        if(serviceInstance != null) {
+        if (serviceInstance != null) {
             IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
             return client.pay(payment);
         } else {
@@ -69,7 +70,7 @@ public class PaymentService implements IPaymentService {
     @Override
     public PaymentDTO returnPay(PaymentDTO payment) {
         ServiceInstance serviceInstance = this.getServiceInstance(payment.getReferenceCode());
-        if(serviceInstance != null) {
+        if (serviceInstance != null) {
             IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
             return client.returnPay(payment);
         } else {
@@ -95,14 +96,15 @@ public class PaymentService implements IPaymentService {
                 .stream()
                 .map(serviceId -> {
                     List<ServiceInstance> serviceInstance = this.discoveryClient.getInstances(serviceId);
-                    if (serviceInstance.size() > 0 && serviceInstance.get(0).getMetadata().containsKey(START_WITH_KEY) &&
-                        referenceCode.startsWith(serviceInstance.get(0).getMetadata().get(START_WITH_KEY))) {
+                    if (serviceInstance.size() > 0
+                            && serviceInstance.get(0).getMetadata().containsKey(START_WITH_KEY)
+                            && referenceCode.startsWith(serviceInstance.get(0).getMetadata().get(START_WITH_KEY))) {
                         return serviceInstance.get(0);
                     }
                     return null;
                 })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return instances.size() > 0? instances.get(0):null;
+        return instances.size() > 0 ? instances.get(0) : null;
     }
 }
