@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
 public class ServiceInstanceController {
     private final DiscoveryClient discoveryClient;
+    private static final String CONVENIO = "convenio";
 
     public ServiceInstanceController(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;
@@ -33,13 +35,12 @@ public class ServiceInstanceController {
                 .stream()
                 .map(serviceId -> {
                     List<ServiceInstance> serviceInstance = this.discoveryClient.getInstances(serviceId);
-                    if(serviceInstance.size() > 0 && serviceInstance.get(0).getMetadata().containsKey("convenio")) {
-                        return serviceInstance.get(0).getMetadata().get("convenio");
-                    };
-
+                    if (serviceInstance.size() > 0 && serviceInstance.get(0).getMetadata().containsKey(CONVENIO)) {
+                        return serviceInstance.get(0).getMetadata().get(CONVENIO);
+                    }
                     return null;
                 })
-                .filter(convenio -> convenio != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         Map<String, List<String>> response = new HashMap<>();
