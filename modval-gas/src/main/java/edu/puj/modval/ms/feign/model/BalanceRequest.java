@@ -4,12 +4,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-/*
+
 @XmlRootElement(
     name = "ReferenciaFactura",
     namespace = "http://www.servicios.co/pagos/schemas"
 )
-*/
 public class BalanceRequest {
     private String referenciaFactura;
 
