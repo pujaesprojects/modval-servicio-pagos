@@ -1,0 +1,88 @@
+#%RAML 1.0
+title: convenios
+version: v0.1.0
+baseUri: https://domain.com/api/payment
+description: Esta API incluye los servicios asociados a la infomracion de pago de los convenios de recuado.
+
+/get-balances:
+  description: Obtiene la informacion de pago
+  type: Object
+  /{reference-code}:
+  description: XXX
+  type: Object
+  responses:
+    get:
+      200:
+        body:s
+          application/json:
+            type: object
+            properties:
+              value:
+                type: amount
+                description: Valor de factura a cancelar
+                required: true
+              date:
+                type: date
+                description: Fecha actual 
+                required: true
+              service:
+                type: string
+                description: Tipo de convenio asociado a la refrencia de pago
+                required: true
+              referenceCode:
+                type: string
+                description: Referencia de pago
+                required: true
+            example: !include example/get-balances/get_200_reference-code.json
+/pay:
+  description: Permite realizar el pago de un convenio
+  type: Object
+  responses:
+    post:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              value:
+                type: amount
+                description: Valor de factura a cancelar
+                required: true
+              date:
+                type: date
+                description: Fecha actual 
+                required: true
+              service:
+                type: string
+                description: Tipo de convenio asociado a la refrencia de pago
+                required: true
+              referenceCode:
+                type: string
+                description: Referencia de pago
+                required: true
+/return-pay:
+  description: Permite realizar la compensacion de los pago de un convenio realizados
+  type: Object
+  responses:
+    post:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              value:
+                type: amount
+                description: Valor de factura a cancelar
+                required: true
+              date:
+                type: date
+                description: Fecha actual 
+                required: true
+              service:
+                type: string
+                description: Tipo de convenio asociado a la refrencia de pago
+                required: true
+              referenceCode:
+                type: string
+                description: Referencia de pago
+                required: true
