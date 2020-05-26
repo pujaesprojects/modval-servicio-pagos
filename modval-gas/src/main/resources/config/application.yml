@@ -27,7 +27,8 @@ eureka:
   instance:
     preferIpAddress: true
     metadata-map:
-      convenio: Gas
+      convenio: Gas,
+      startsWith: 1234
 
 spring:
   application:

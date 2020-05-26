@@ -23,4 +23,8 @@ public interface PaymentClient {
     @Headers("SOAPAction: pagar")
     @PostMapping(value = "", consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
     PaymentResponse pay(@RequestBody PaymentRequest paymentRequest);
+
+    @Headers("SOAPAction: compensar")
+    @PostMapping(value = "", consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
+    PaymentResponse returnPay(@RequestBody PaymentRequest paymentRequest);
 }
