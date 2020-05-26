@@ -27,7 +27,8 @@ public class WaterPaymentController implements IPaymentController {
 
     @Override
     public ResponseEntity<PaymentDTO> pay(PaymentDTO payment) {
-        return null;
+        var paymentDTO = waterService.pay(payment);
+        return ResponseEntity.ok(paymentDTO);
     }
 
     @Override

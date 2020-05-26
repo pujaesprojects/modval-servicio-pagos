@@ -2,10 +2,15 @@ package edu.puj.modval.ms.service;
 
 import edu.puj.modval.ms.client.ClientWaterProvider;
 import edu.puj.modval.ms.dto.PaymentDTO;
+import edu.puj.modval.ms.dto.PaymentResponseDTO;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+
+import edu.puj.modval.ms.client.dto.WaterServiceRequest;
+import edu.puj.modval.ms.client.dto.WaterServiceResponse;
 
 @Service
 public class WaterService implements IPaymentService {
@@ -21,7 +26,7 @@ public class WaterService implements IPaymentService {
 
     @Override
     public PaymentDTO getBalance(String reference) {
-        var resultBalance = clientWaterProvider.getInfoFactura(reference);
+        var resultBalance = clientWaterProvider.getInfoFactura(reference    );
         PaymentDTO paymentDTO = new PaymentDTO();
         paymentDTO.setValue(resultBalance.getValorFactura());
         paymentDTO.setDate(LocalDate.now());
@@ -32,8 +37,16 @@ public class WaterService implements IPaymentService {
     }
 
     @Override
-    public PaymentDTO pay(PaymentDTO payment) {
-        return null;
+    public PaymentDTO pay(PaymentDTO payment) {   
+      WaterServiceRequest waterServiceRequest = new WaterServiceRequest();
+      var resultPay = clientWaterProvider.pagarFactura(payment.getReferenceCode(), waterServiceRequest);
+      PaymentResponseDTO paymentResponseDTO = new PaymentResponseDTO();
+      paymentResponseDTO.setValue(payment.getValue());
+      paymentResponseDTO.setDate(LocalDate.now());
+      paymentResponseDTO.setReferenceCode(payment.getReferenceCode());
+      paymentResponseDTO.setService(convenioName);
+      paymentResponseDTO.setMessage(resultPay.getMensaje());
+      return paymentResponseDTO;
     }
 
     @Override

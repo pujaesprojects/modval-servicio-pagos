@@ -7,9 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WaterServiceResponse {
+public class WaterServiceRequest {
+  
+  private long idFactura;
+  private double valorFactura;
 
-    private String mensaje;
-    private int idFactura;
-    private double valorFactura;
+  
 }
