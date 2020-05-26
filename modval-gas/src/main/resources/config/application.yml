@@ -58,4 +58,4 @@ server:
         http-only: true
 
 modval:
-  payment-service-url: http://localhost:8080/gas-service/PagosService
+  payment-service-url: ${GAS_URI:http://localhost:8080/gas-service/PagosService}

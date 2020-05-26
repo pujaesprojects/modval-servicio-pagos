@@ -11,7 +11,7 @@ import edu.puj.modval.ms.client.dto.WaterServiceResponse;
 import edu.puj.modval.ms.client.dto.WaterServiceRequest;
 
 @Component
-@FeignClient(name="waterProvider", url="http://localhost:9090/servicios/pagos/v1")
+@FeignClient(name="waterProvider", url = "${modval.payment-service-url}")
 public interface ClientWaterProvider {
   
   @RequestMapping(method = RequestMethod.GET, value= "/payments/{idFactura}")

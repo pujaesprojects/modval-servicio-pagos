@@ -56,3 +56,6 @@ server:
     session:
       cookie:
         http-only: true
+
+modval:
+  payment-service-url: ${WATER_URI:http://localhost:9090/servicios/pagos/v1}
