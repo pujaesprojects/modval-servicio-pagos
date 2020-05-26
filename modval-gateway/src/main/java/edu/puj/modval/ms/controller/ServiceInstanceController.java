@@ -1,14 +1,7 @@
 package edu.puj.modval.ms.controller;
 
-import edu.puj.modval.ms.controller.vm.PaymentClientController;
-import edu.puj.modval.ms.dto.PaymentDTO;
-import edu.puj.modval.ms.feign.PaymentDecoder;
-import feign.Feign;
-import feign.Logger;
-import feign.codec.Encoder;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 public class ServiceInstanceController {
     private final DiscoveryClient discoveryClient;
+
     private static final String CONVENIO = "convenio";
 
     public ServiceInstanceController(DiscoveryClient discoveryClient) {
@@ -36,7 +30,7 @@ public class ServiceInstanceController {
         return this.discoveryClient.getInstances(applicationName);
     }
 
-    @GetMapping(value = "/convenios", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/convenios", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, List<String>>> getServices() {
         List<String> convenios = this.discoveryClient.getServices()
                 .stream()
@@ -53,35 +47,5 @@ public class ServiceInstanceController {
         Map<String, List<String>> response = new HashMap<>();
         response.put("convenios", convenios);
         return ResponseEntity.ok(response);
-    }
-
-    @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PaymentDTO> getServices2() {
-        var convenios = this.discoveryClient.getServices()
-                .stream()
-                .map(serviceId -> {
-                    List<ServiceInstance> serviceInstance = this.discoveryClient.getInstances(serviceId);
-                    if (serviceInstance.size() > 0 && serviceInstance.get(0).getMetadata().containsKey(CONVENIO)) {
-                        return serviceInstance.get(0);
-                    }
-                    return null;
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-
-        var conveniox = convenios.get(0);
-        var clientConvenio = loadClient(conveniox.getUri().toString());
-        var balance = clientConvenio.getBalance("1234847291");
-        return ResponseEntity.ok(balance);
-    }
-
-    private PaymentClientController loadClient(final String url) {
-        PaymentClientController paymentController = Feign.builder()
-                .encoder(new Encoder.Default())
-                .decoder(new PaymentDecoder())
-                .logLevel(Logger.Level.FULL)
-                .contract(new SpringMvcContract())
-                .target(PaymentClientController.class, url);
-        return paymentController;
     }
 }
