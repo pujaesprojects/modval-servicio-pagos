@@ -55,3 +55,6 @@ server:
     session:
       cookie:
         http-only: true
+
+modval:
+  payment-service-url: http://localhost:8080/gas-service/PagosService

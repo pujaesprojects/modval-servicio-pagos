@@ -56,6 +56,10 @@ dependencies {
 
     compile project(':modval-core')
 
+    implementation "io.github.openfeign:feign-soap:10.7.4"
+    implementation "javax.xml.soap:javax.xml.soap-api:1.4.0"
+    implementation "com.sun.xml.messaging.saaj:saaj-impl:1.5.1"
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
