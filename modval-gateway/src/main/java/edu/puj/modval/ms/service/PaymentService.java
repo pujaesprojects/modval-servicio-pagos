@@ -1,6 +1,5 @@
 package edu.puj.modval.ms.service;
 
-import edu.puj.modval.ms.controller.IPaymentController;
 import edu.puj.modval.ms.dto.PaymentDTO;
 import edu.puj.modval.ms.dto.PaymentResponseDTO;
 import edu.puj.modval.ms.feign.client.IPaymentClient;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -105,7 +103,7 @@ public class PaymentService implements IPaymentService {
                 })
                 .filter(Objects::nonNull)
                 .findFirst()
-                .get();
+                .orElse(null);
         return instance;
     }
 }
