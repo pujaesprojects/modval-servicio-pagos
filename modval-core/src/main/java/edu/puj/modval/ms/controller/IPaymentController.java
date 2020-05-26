@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 public interface IPaymentController {
-
     @GetMapping(value = "/get-balance/{referenceCode}")
-    PaymentDTO getBalance(@PathVariable("referenceCode") String referenceCode);
+    ResponseEntity<PaymentDTO> getBalance(@PathVariable("referenceCode") String referenceCode);
 
     @PostMapping(value = "/pay")
-    public ResponseEntity<PaymentDTO> pay(@RequestBody PaymentDTO payment);
+    ResponseEntity<PaymentDTO> pay(@RequestBody PaymentDTO payment);
+
+    @PostMapping(value = "/return-pay")
+    ResponseEntity<PaymentDTO> returnPay(@RequestBody PaymentDTO payment);
 }

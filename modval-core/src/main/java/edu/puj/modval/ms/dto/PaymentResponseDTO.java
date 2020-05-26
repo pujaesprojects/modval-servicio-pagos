@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class PaymentResponseDTO extends PaymentDTO {
     private String message;
+    private Boolean error = false;
 }
