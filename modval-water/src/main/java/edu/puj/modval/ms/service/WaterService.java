@@ -1,10 +1,9 @@
 package edu.puj.modval.ms.service;
 
-import edu.puj.modval.ms.client.dto.WaterServiceResponse;
-import edu.puj.modval.ms.dto.PaymentDTO;
-import org.springframework.stereotype.Service;
-
 import edu.puj.modval.ms.client.ClientWaterProvider;
+import edu.puj.modval.ms.dto.PaymentDTO;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
@@ -12,6 +11,9 @@ import java.time.LocalDate;
 public class WaterService implements IPaymentService {
 
     private final ClientWaterProvider clientWaterProvider;
+
+    @Value("${eureka.instance.metadata-map.convenio}")
+    private String convenioName;
 
     public WaterService(ClientWaterProvider clientWaterProvider) {
         this.clientWaterProvider = clientWaterProvider;
@@ -24,6 +26,7 @@ public class WaterService implements IPaymentService {
         paymentDTO.setValue(resultBalance.getValorFactura());
         paymentDTO.setDate(LocalDate.now());
         paymentDTO.setReferenceCode(reference);
+        paymentDTO.setService(convenioName);
 
         return paymentDTO;
     }

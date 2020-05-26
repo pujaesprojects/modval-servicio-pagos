@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PaymentController implements IPaymentController {
+public class GasPaymentController implements IPaymentController {
     private final PaymentService paymentService;
 
-    public PaymentController(PaymentService paymentService) {
+    public GasPaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 

@@ -43,7 +43,7 @@ public class PaymentService implements IPaymentService {
     public PaymentDTO getBalance(String reference) {
         ServiceInstance serviceInstance = this.getServiceInstance(reference);
         if (serviceInstance != null) {
-            IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
+            var client = this.loadClient(serviceInstance.getUri().toString());
             return client.getBalance(reference);
         } else {
             PaymentResponseDTO responseDTO = new PaymentResponseDTO();
@@ -57,7 +57,7 @@ public class PaymentService implements IPaymentService {
     public PaymentDTO pay(PaymentDTO payment) {
         ServiceInstance serviceInstance = this.getServiceInstance(payment.getReferenceCode());
         if (serviceInstance != null) {
-            IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
+            var client = this.loadClient(serviceInstance.getUri().toString());
             return client.pay(payment);
         } else {
             PaymentResponseDTO responseDTO = new PaymentResponseDTO();
@@ -71,7 +71,7 @@ public class PaymentService implements IPaymentService {
     public PaymentDTO returnPay(PaymentDTO payment) {
         ServiceInstance serviceInstance = this.getServiceInstance(payment.getReferenceCode());
         if (serviceInstance != null) {
-            IPaymentClient client = this.loadClient(serviceInstance.getUri().toString());
+            var client = this.loadClient(serviceInstance.getUri().toString());
             return client.returnPay(payment);
         } else {
             PaymentResponseDTO responseDTO = new PaymentResponseDTO();
@@ -92,7 +92,7 @@ public class PaymentService implements IPaymentService {
     }
 
     private ServiceInstance getServiceInstance(String referenceCode) {
-        List<ServiceInstance> instances = this.discoveryClient.getServices()
+        ServiceInstance instance = this.discoveryClient.getServices()
                 .stream()
                 .map(serviceId -> {
                     List<ServiceInstance> serviceInstance = this.discoveryClient.getInstances(serviceId);
@@ -104,7 +104,8 @@ public class PaymentService implements IPaymentService {
                     return null;
                 })
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        return instances.size() > 0 ? instances.get(0) : null;
+                .findFirst()
+                .get();
+        return instance;
     }
 }

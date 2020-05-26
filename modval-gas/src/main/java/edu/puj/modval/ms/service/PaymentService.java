@@ -9,6 +9,7 @@ import edu.puj.modval.ms.feign.model.PaymentRequest;
 import edu.puj.modval.ms.feign.model.PaymentResponse;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,6 +24,9 @@ public class PaymentService implements IPaymentService {
     private static final String SERVICE_ERROR = "Error contactando al convenio, intente más tarde";
 
     private final PaymentClient paymentClient;
+
+    @Value("${eureka.instance.metadata-map.convenio}")
+    private String convenioName;
 
     public PaymentService(PaymentClient paymentClient) {
         this.paymentClient = paymentClient;
@@ -85,7 +89,7 @@ public class PaymentService implements IPaymentService {
         PaymentResponseDTO paymentDTO = new PaymentResponseDTO();
         paymentDTO.setDate(LocalDate.now());
         paymentDTO.setReferenceCode(response.getReferenciaFactura().getReferenciaFactura());
-        paymentDTO.setService("Gas");
+        paymentDTO.setService(convenioName);
         paymentDTO.setMessage(response.getMensaje());
         log.debug("Respuesta del servicio: {}", response);
         paymentDTO.setValue(paymentRequest.getTotalPagar());

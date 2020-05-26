@@ -11,11 +11,11 @@ import java.time.LocalDate;
 
 
 @RestController
-public class WaterController implements IPaymentController {
+public class WaterPaymentController implements IPaymentController {
 
     private final WaterService waterService;
 
-    public WaterController(WaterService waterService) {
+    public WaterPaymentController(WaterService waterService) {
         this.waterService = waterService;
     }
 
