@@ -1,86 +1,86 @@
 #%RAML 1.0
-title: convenios
+title: API-GATEWAY
 version: v0.1.0
 baseUri: https://domain.com/api/payment
-description: Esta API incluye los servicios asociados a la infomracion de pago de los convenios de recuado.
+description: Esta API incluye los servicios asociados a la informacion de pago de los convenios de recuado.
 
 /get-balances:
-  /{reference-code}:
-    description: Obtiene la informacion de pago
-    type: Object
+  description: API encargada de proveer la informacion de pago de los convenios de recaudo del BANCO ABC
+  /{referenceCode}:
+    description: Obtiene la informacion basica de cobro para el pago de convenios de recaudo
     get:
+      description: Obtiene la informacion basica de cobro para el pago de convenios de recaudo
       responses:
-          200:
-            body:
-              application/json:
-                type: object
-                properties:
-                  value:
-                    type: amount
-                    description: Valor de factura a cancelar
-                    required: true
-                  date:
-                    type: date
-                    description: Fecha actual
-                    required: true
-                  service:
-                    type: string
-                    description: Tipo de convenio asociado a la refrencia de pago
-                    required: true
-                  referenceCode:
-                    type: string
-                    description: Referencia de pago
-                    required: true
-                example: !include example/get-balances/get_200_reference-code.json
+        200:
+          body:
+            application/json:
+              properties:
+                date:
+                  description: Fecha actual
+                  type: string
+                  required: true
+                service:
+                  description: Tipo de convenio asociado a la refrencia de pago
+                  type: string
+                  required: true
+                referenceCode:
+                  description: Referencia de pago
+                  type: string
+                  required: true
+              example: !include example/get-balances/get_200_reference-code.json
+        404:
+          body:
+            application/json:
+              example: {"message": "Resource not found" }
 /pay:
-  description: Permite realizar el pago de un convenio
-  type: Object
+  description: Permite realizar el el pago de un convenio espeficico de recaudo
   post:
+    description: Permite realizar el el pago de un convenio espeficico de recaudo
     responses:
-        200:
-          body:
-            application/json:
-              type: object
-              properties:
-                value:
-                  type: amount
-                  description: Valor de factura a cancelar
-                  required: true
-                date:
-                  type: date
-                  description: Fecha actual
-                  required: true
-                service:
-                  type: string
-                  description: Tipo de convenio asociado a la refrencia de pago
-                  required: true
-                referenceCode:
-                  type: string
-                  description: Referencia de pago
-                  required: true
+      200:
+        body:
+          application/json:
+            properties:
+              date:
+                description: Fecha actual
+                type: string
+                required: true
+              service:
+                description: Tipo de convenio asociado a la refrencia de pago
+                type: string
+                required: true
+              referenceCode:
+                description: Referencia de pago
+                type: string
+                required: true
+            example: !include example/get-balances/get_200_reference-code.json
+      404:
+        body:
+          application/json:
+            example: {"message": "Resource not found" }
 /return-pay:
-  description: Permite realizar la compensacion de los pago de un convenio realizados
-  type: Object
+  description: Permite realizar la compensacion de los pago de un convenio realizados con el proveedor del servicio de pago
   post:
+    description: Permite realizar la compensacion de los pago de un convenio realizados con el proveedor del servicio de pago
     responses:
-        200:
-          body:
-            application/json:
-              type: object
-              properties:
-                value:
-                  type: amount
-                  description: Valor de factura a cancelar
-                  required: true
-                date:
-                  type: date
-                  description: Fecha actual
-                  required: true
-                service:
-                  type: string
-                  description: Tipo de convenio asociado a la refrencia de pago
-                  required: true
-                referenceCode:
-                  type: string
-                  description: Referencia de pago
-                  required: true
+      200:
+        body:
+          application/json:
+            properties:
+              date:
+                description: Fecha actual
+                type: string
+                required: true
+              service:
+                description: Tipo de convenio asociado a la refrencia de pago
+                type: string
+                required: true
+              referenceCode:
+                description: Referencia de pago
+                type: string
+                required: true
+            example: !include example/get-balances/get_200_reference-code.json
+      404:
+        body:
+          application/json:
+            example: {"message": "Resource not found" }
