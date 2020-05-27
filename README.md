@@ -1,12 +1,12 @@
 # Arquitectura Candidata
 
-![alt text](images/arquitectura_candidata.png "Arquitectura candidata")
+![alt text](resources/doc/images/arquitectura_candidata.png "Arquitectura candidata")
 
 ## Arquitectura Definitiva
 
 La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
 
-![alt text](images/modelo.png "Modelo")
+![alt text](resources/doc/images/modelo.png "Modelo")
 
 La arquitectura se basa en un patron SOA, basado en microservicios.
 
