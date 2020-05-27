@@ -1,3 +1,7 @@
+# Arquitectura Candidata
+
+https://github.com/pujaesprojects/modval-servicio-pagos/resources/doc/images/arquitectura_candidata.png
+
 # Servicio de Pagos
 
 Microservicio base para el Taller 2 de Modelado y Validación.
