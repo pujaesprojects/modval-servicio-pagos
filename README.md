@@ -1,6 +1,6 @@
 # Arquitectura Candidata
 
-https://github.com/pujaesprojects/modval-servicio-pagos/resources/doc/images/arquitectura_candidata.png
+![alt text](images/arquitectura_candidata.png "Logo Title Text 1")
 
 # Servicio de Pagos
 
