@@ -1,3 +1,21 @@
+# Arquitectura Candidata
+
+![alt text](images/arquitectura_candidata.png "Arquitectura candidata")
+
+## Arquitectura Definitiva
+
+La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
+
+![alt text](images/modelo.png "Modelo")
+
+La arquitectura se basa en un patron SOA, basado en microservicios.
+
+Los microservicios son:
+
+1. Eureka server que hace de descubridor de servicios.
+2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
+3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
+
 # Servicio de Pagos
 
 Microservicio base para el Taller 2 de Modelado y Validación.
@@ -8,19 +26,6 @@ Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la 
 
 https://github.com/pujaesprojects/modval-servicio-pagos/packages
 
-## Modelo
-
-La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
-
-![alt text](images/modelo.png "Modelo de arquitectura")
-
-La arquitectura se basa en un patron SOA, basado en microservicios.
-
-Los microservicios son:
-
-1. Eureka server que hace de descubridor de servicios.
-2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
-3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
 
 ### Ejecución:
 

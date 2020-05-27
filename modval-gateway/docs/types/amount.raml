@@ -1,0 +1,28 @@
+#%RAML 1.0 Library
+
+types:
+  amount:
+    type: object  
+    properties:
+      amount:
+        type: number
+        description: Monetary amount.
+        required: false
+        (annotations.bindingDefinition):
+          - method: GET
+            input: NONE
+            output: REQUIRED
+          - method: POST
+            input: REQUIRED
+            output: NONE
+      currency:
+        type: string
+        description: String based on ISO-4217 for specifying the currency.
+        required: false
+        (annotations.bindingDefinition):
+          - method: GET
+            input: NONE
+            output: REQUIRED
+          - method: POST
+            input: REQUIRED
+            output: NONE
