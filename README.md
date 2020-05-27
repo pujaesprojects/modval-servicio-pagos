@@ -12,9 +12,15 @@ https://github.com/pujaesprojects/modval-servicio-pagos/packages
 
 La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
 
-![alt text](images/modelo.png "Logo Title Text 1")
+![alt text](images/modelo.png "Modelo de arquitectura")
 
+La arquitectura se basa en un patron SOA, basado en microservicios.
 
+Los microservicios son:
+
+1. Eureka server que hace de descubridor de servicios.
+2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
+3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
 
 ### Ejecución:
 
@@ -59,3 +65,42 @@ Para crear el jar ejecutable se debe ejecutar:
 ```bash
 ./gradlew [submodulo]:bootJar
 ```
+
+### Despliegue:
+
+Para el despliegue se utilizan las imagenes de docker que se encuentran en: https://github.com/pujaesprojects/modval-servicio-pagos/packages
+
+#### Creación de red docker (primera vez)
+
+```bash
+docker network create modval
+```
+
+
+#### Ejecución de los microservicios:
+
+```bash
+
+docker run --name "eureka-server" -p 8761:8761 -d -t docker.pkg.github.com/pujaesprojects/modval-eureka-server/registry
+
+docker run --name "modval-gateway" -p 8080:8090 --network modval -e "EUREKA_URI=http://eureka-server:8761/eureka" -d -t docker.pkg.github.com/pujaesprojects/modval-servicio-pagos/modval-gateway
+
+docker run --name "modval-water" --network modval -e "WATER_URI=http://water-service:8080/servicios/pagos/v1" -e "EUREKA_URI=http://eureka-server:8761/eureka" -d -t docker.pkg.github.com/pujaesprojects/modval-servicio-pagos/modval-water
+
+docker run --name "modval-gas" --network modval -e "GAS_URI=http://gas-service-soap_web-services_1:8080/gas-service/PagosService" -e "EUREKA_URI=http://eureka-server:8761/eureka" -d -t docker.pkg.github.com/pujaesprojects/modval-servicio-pagos/modval-gas
+
+```
+
+### Documentación de Referencia
+Esta documentación puede ser util para futuras referencias:
+
+* [Official Gradle documentation](https://docs.gradle.org)
+* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/gradle-plugin/reference/html/)
+* [Spring Cloud OpenFeign](https://cloud.spring.io/spring-cloud-openfeign/reference/html/)
+* [Introduction to Spring Cloud OpenFeign](https://www.baeldung.com/spring-cloud-openfeign)
+
+
+### Referencia adicional
+These additional references should also help you:
+
+* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
