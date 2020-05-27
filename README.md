@@ -1,3 +1,13 @@
+# Servicio de Pagos
+
+Microservicio base para el Taller 2 de Modelado y Validación.
+
+Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
+
+Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
+
+https://github.com/pujaesprojects/modval-servicio-pagos/packages
+
 # Arquitectura Candidata
 
 ![alt text](resources/doc/images/arquitectura_candidata.png "Arquitectura candidata")
@@ -27,17 +37,6 @@ Los microservicios son:
 | Composabilidad | Escribir un nuevo convenio permite reusar bastante código a través de la implementación de las interfaces propuestas. |
 | Modularidad | Cada servicio de composición es un módulo que se despliega independientemente. |
 | Performance | Alto rendimiento en el descubrimiento y presentación de servicios. "
-
-
-# Servicio de Pagos
-
-Microservicio base para el Taller 2 de Modelado y Validación.
-
-Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
-
-Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
-
-https://github.com/pujaesprojects/modval-servicio-pagos/packages
 
 
 ### Ejecución:
