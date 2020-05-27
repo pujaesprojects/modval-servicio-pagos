@@ -1,3 +1,13 @@
+# Servicio de Pagos
+
+Microservicio base para el Taller 2 de Modelado y Validación.
+
+Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
+
+Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
+
+https://github.com/pujaesprojects/modval-servicio-pagos/packages
+
 # Arquitectura Candidata
 
 ![alt text](images/arquitectura_candidata.png "Arquitectura candidata")
@@ -12,20 +22,19 @@ La arquitectura se basa en un patron SOA, basado en microservicios.
 
 Los microservicios son:
 
-1. Eureka server que hace de descubridor de servicios.
-2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
-3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
+| Microservicio  | Responsabilidad |
+| -------------  | --------------- |
+| Descubridor de servicios | Se encarga del descubrimiento de los servicios y la coreografiá de los mismos. |
+| Gateway API    | Tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas. |
+| Microservicios por convenio | Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente. |
 
-# Servicio de Pagos
+## Herramientas y frameworks:
 
-Microservicio base para el Taller 2 de Modelado y Validación.
-
-Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
-
-Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
-
-https://github.com/pujaesprojects/modval-servicio-pagos/packages
-
+| Herramienta  | Descripción |
+| -----------  | ----------- |
+| Spring cloud | Los microservicios utilizaron las herramietas provistas por spring cloud, principalmente Spring Cloud Eureka, Spring Cloud Openfeign |
+| Eureka       | Es el descubridor de servicios y el encargado de la coreografia de todos los microservicos   |
+| Open feign   | Esta herrameienta provee capacidades de comunciación a servicios, en los microservicios se usa para la comunicación entre los mismos |
 
 ### Ejecución:
 
