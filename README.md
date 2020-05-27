@@ -12,9 +12,11 @@ La arquitectura se basa en un patron SOA, basado en microservicios.
 
 Los microservicios son:
 
-1. Eureka server que hace de descubridor de servicios.
-2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
-3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
+| Microservicio  | Responsabilidad |
+| -------------  | --------------- |
+| Descubridor de servicios | Se encarga del descubrimiento de los servicios y la coreografiá de los mismos. |
+| Gateway API    | Tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas. |
+| Microservicios por convenio | Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente. |
 
 
 ## Trade Offs
