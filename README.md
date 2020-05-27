@@ -1,13 +1,3 @@
-# Servicio de Pagos
-
-Microservicio base para el Taller 2 de Modelado y Validación.
-
-Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
-
-Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
-
-https://github.com/pujaesprojects/modval-servicio-pagos/packages
-
 # Arquitectura Candidata
 
 ![alt text](images/arquitectura_candidata.png "Arquitectura candidata")
@@ -22,19 +12,31 @@ La arquitectura se basa en un patron SOA, basado en microservicios.
 
 Los microservicios son:
 
-| Microservicio  | Responsabilidad |
-| -------------  | --------------- |
-| Descubridor de servicios | Se encarga del descubrimiento de los servicios y la coreografiá de los mismos. |
-| Gateway API    | Tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas. |
-| Microservicios por convenio | Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente. |
+1. Eureka server que hace de descubridor de servicios.
+2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
+3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
 
-## Herramientas y frameworks:
 
-| Herramienta  | Descripción |
-| -----------  | ----------- |
-| Spring cloud | Los microservicios utilizaron las herramietas provistas por spring cloud, principalmente Spring Cloud Eureka, Spring Cloud Openfeign |
-| Eureka       | Es el descubridor de servicios y el encargado de la coreografia de todos los microservicos   |
-| Open feign   | Esta herrameienta provee capacidades de comunciación a servicios, en los microservicios se usa para la comunicación entre los mismos |
+## Trade Offs
+
+| Nombre | Descripción |
+ -- | -- |
+| Escalabilidad | Bajo costo para agregar capacidad si la carga aumenta. | 
+| Composabilidad | Escribir un nuevo convenio permite reusar bastante código a través de la implementación de las interfaces propuestas. |
+| Modularidad | Cada servicio de composición es un módulo que se despliega independientemente. |
+| Performance | Alto rendimiento en el descubrimiento y presentación de servicios. "
+
+
+# Servicio de Pagos
+
+Microservicio base para el Taller 2 de Modelado y Validación.
+
+Este proyecto está dividido en submodulos de Gradle, cada submodulo es un microservicio.
+
+Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
+
+https://github.com/pujaesprojects/modval-servicio-pagos/packages
+
 
 ### Ejecución:
 
