@@ -1,20 +1,22 @@
 # Arquitectura Candidata
 
-![alt text](images/arquitectura_candidata.png "Arquitectura candidata")
+![alt text](resources/doc/images/arquitectura_candidata.png "Arquitectura candidata")
 
 ## Arquitectura Definitiva
 
 La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
 
-![alt text](images/modelo.png "Modelo")
+![alt text](resources/doc/images/modelo.png "Modelo")
 
 La arquitectura se basa en un patron SOA, basado en microservicios.
 
 Los microservicios son:
 
-1. Eureka server que hace de descubridor de servicios.
-2. Un microservicio gateway que tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas.
-3. Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente.
+| Microservicio  | Responsabilidad |
+| -------------  | --------------- |
+| Descubridor de servicios | Se encarga del descubrimiento de los servicios y la coreografiá de los mismos. |
+| Gateway API    | Tiene las funciones del negocio y se comunica con los microservicios haciendo las veces del intermediador de las rutas. |
+| Microservicios por convenio | Un microservicio por convenio, que hace las veces de api proxy, este recibe los parámetros dados por el gateway y se comunica con los servicios del proveedor del convenio correpondiente. |
 
 
 ## Trade Offs
