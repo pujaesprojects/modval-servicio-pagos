@@ -2,6 +2,13 @@
 
 ![alt text](images/arquitectura_candidata.png "Logo Title Text 1")
 
+## Arquitectura Definitiva
+
+La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
+
+![alt text](images/modelo.png "Logo Title Text 1")
+
+
 # Servicio de Pagos
 
 Microservicio base para el Taller 2 de Modelado y Validación.
@@ -11,13 +18,6 @@ Este proyecto está dividido en submodulos de Gradle, cada submodulo es un micro
 Al enviar cambios a este repositorio, automaticamente se empaqueta y se crea la imagen correspondiente de docker en:
 
 https://github.com/pujaesprojects/modval-servicio-pagos/packages
-
-## Modelo
-
-La solución para la implementación de los convenios de pago del banco ABC se modeló de la siguiente manera:
-
-![alt text](images/modelo.png "Logo Title Text 1")
-
 
 
 ### Ejecución:
